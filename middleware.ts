@@ -1,7 +1,22 @@
-import { NextMiddleware, NextResponse } from "next/server";
+import {
+  NextMiddleware,
+  NextRequest,
+  NextFetchEvent,
+  NextResponse,
+} from "next/server";
 
 const middleware: NextMiddleware = (() => {
-  return () => NextResponse.next();
+  const middlewareFactory =
+    () =>
+    async (request: NextRequest, _next: NextFetchEvent, ...rest) => {
+      // console.log(request);
+      // console.log(_next);
+      // console.log(rest);
+
+      return NextResponse.next();
+    };
+
+  return middlewareFactory();
 })();
 
 export default middleware;
